@@ -5,6 +5,8 @@ The work is based on python project: [link](https://github.com/mpatacchiola/deep
   
   ![detected object](/detected_obj.png)
 
-
+  
+### Notes
+* Using OpenCV 3.2.0
 
 
