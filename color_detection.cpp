@@ -33,13 +33,13 @@ cv::Mat MultiBackProjectionColorDetector::frameFiltered(cv::Mat frame, bool morp
 
 cv::Mat MultiBackProjectionColorDetector::frameMask(cv::Mat frame, bool morph_opening, bool blur, int kernel_size, int iterations)
 {
-	if(hsvTemplates.size() == 0) CV_Error( cv::Error::StsBadArg, "templates are empty!" );
-	cv::Mat frameHSV;
-	cv::cvtColor(frame, frameHSV, cv::COLOR_BGR2HSV);
-	cv::Mat mask = cv::Mat::zeros(frame.rows, frame.cols, CV_8UC1);
+    if(hsvTemplates.size() == 0) CV_Error( cv::Error::StsBadArg, "templates are empty!" );
+    cv::Mat frameHSV;
+    cv::cvtColor(frame, frameHSV, cv::COLOR_BGR2HSV);
+    cv::Mat mask = cv::Mat::zeros(frame.rows, frame.cols, CV_8UC1);
 
-	// Histogram parameters:
-	int hbins = 180, sbins = 256; // 30, 32
+    // Histogram parameters:
+    int hbins = 180, sbins = 256; // 30, 32
     int histSize[] = {hbins, sbins};
     // hue varies from 0 to 179
     float hranges[] = { 0, 180 };
@@ -92,12 +92,5 @@ cv::Mat MultiBackProjectionColorDetector::frameMask(cv::Mat frame, bool morph_op
     // will resize to 255 each value which is higher that that...
     // cv::normalize(mask, mask, 0, 255, cv::NORM_MINMAX) // Not necessary
 
-	// mask.convertTo(mask, CV_8UC1);
-    cv::threshold(mask, mask, 50, 255, cv::THRESH_BINARY);
-	std::vector<cv::Mat> outputMask(3);
-	cv::Mat outputMask2;
-	for(int i=0; i<outputMask.size(); ++i) outputMask[i] = mask;
-	cv::merge(outputMask, outputMask2); // !!!
-	//std::cout << "Mask3 channels: " << outputMask2.channels() << std::endl;
-    return outputMask2;
+    return mask;
 };
