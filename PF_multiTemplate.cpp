@@ -118,9 +118,6 @@ int main(int argc, char** argv)
    	int frameWidth = cap.get(CV_CAP_PROP_FRAME_WIDTH);
    	int frameHeight = cap.get(CV_CAP_PROP_FRAME_HEIGHT);
    	VideoWriter video("out.avi", CV_FOURCC('M','J','P','G'), fps, Size(frameWidth, frameHeight), true); // or XVID, X264
-	
-	// Declaring the binary mask analyser object
-	BinaryMaskAnalyser myMaskAnalyser;
 
 	// Defining the color detector object
 	MultiBackProjectionColorDetector myBackDetector;
@@ -145,7 +142,10 @@ int main(int argc, char** argv)
 		// Return the binary mask from the backprojection algorithm
     	frameMask = myBackDetector.frameMask(frame, true, true, 5, 2);
 		//cout << "Number of contours: " << myMaskAnalyser.numberOfContours(frame) << endl;
-
+		
+		// Declaring the binary mask analyser object
+		BinaryMaskAnalyser myMaskAnalyser;
+		
 		if(myMaskAnalyser.numberOfContours(frameMask) > 0)	
 		{
 			// Use the binary mask to find the contour with largest area
