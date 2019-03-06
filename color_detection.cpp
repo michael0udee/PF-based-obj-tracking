@@ -79,10 +79,6 @@ cv::Mat MultiBackProjectionColorDetector::frameMask(cv::Mat frame, bool morph_op
         // Get the threshold
 		cv::Mat frameHSVthreshold;
 		cv::threshold(frameHSVclean, frameHSVthreshold, 50, 255, cv::THRESH_BINARY);
-		//std::cout << "Mask channels: " << mask.channels() << std::endl;
-		//std::cout << "Threshold channels: " << frameHSVthreshold.channels() << std::endl;
-		//std::cout << "Mask size: " << mask.rows <<"x"<< mask.cols << std::endl;
-		//std::cout << "Threshold size: " << frameHSVthreshold.rows <<"x"<< frameHSVthreshold.cols << std::endl;
 		
         mask += frameHSVthreshold; // Add the threshold to the mask
 	}
