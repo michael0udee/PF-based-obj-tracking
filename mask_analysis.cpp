@@ -15,14 +15,9 @@ void BinaryMaskAnalyser::getContoursFromMask(cv::Mat &mask)
 
 std::vector<cv::Point> BinaryMaskAnalyser::getMaxAreaElementContour()
 {
-	for(int i=0; i < contours.size(); ++i)
-		areaArray.push_back(0.0);
-    int counter = 0;
-	for (auto cnt : contours)
-	{   
-        areaArray[counter] = cv::contourArea(cnt);
-        counter++;
-	}
+	for (auto cnt : contours) 
+        areaArray.push_back(cv::contourArea(cnt));    
+
 	if(areaArray.size()==0)
 		std::cout << "No contours!" << std::endl; // the array is empty
 	// return the index of the max element
